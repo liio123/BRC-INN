@@ -15,106 +15,9 @@ band_num = 5
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-#9-6
-# DE = torch.tensor(np.load("G:/组合脑相关内容/SEED/第一个会话的DE/1.npy").real.astype(float), dtype=torch.float)
-# rule = np.load("G:/吴老师的论文/规则集解释/SEED/1_20131027_rules.npy")
-# print(rule)
-#
-# # labels = np.concatenate([np.full((235,1), 2), np.ones([233, 1]), np.zeros([206, 1]), np.zeros([238, 1]), np.ones([185, 1]), np.full((195,1), 2), np.zeros([237, 1]),
-# #                           np.ones([216, 1]), np.full((265,1), 2), np.full((237,1), 2), np.ones([235, 1]), np.zeros([233, 1]), np.ones([235, 1]), np.full((238,1), 2),
-# #                           np.ones([206, 1])])
-# train_DE = DE[0:2010, :, :]
-# test_DE = DE[2010:3394, :, :]
-# train_label = np.concatenate([np.full((235,1), 2), np.ones([233, 1]), np.zeros([206, 1]), np.zeros([238, 1]), np.ones([185, 1]), np.full((195,1), 2), np.zeros([237, 1]),
-#                           np.ones([216, 1]), np.full((265,1), 2)])
-# test_label = np.concatenate([np.full((237,1), 2), np.ones([235, 1]), np.zeros([233, 1]), np.ones([235, 1]), np.full((238,1), 2),
-#                           np.ones([206, 1])])
-# train_label = torch.tensor(train_label, dtype=torch.int64).squeeze_(1)
-# test_label = torch.tensor(test_label, dtype=torch.int64).squeeze_(1)
-#
-# train_data = TensorDataset(train_DE, train_label)
-# test_data = TensorDataset(test_DE, test_label)
-# train_loader = DataLoader(train_data, batch_size=batch_size,drop_last=True)
-# test_loader = DataLoader(test_data, batch_size=batch_size,drop_last=True)
-# print("dataloader已完成装载............")
-# model = Model(xdim = [batch_size, channel_num, band_num], kadj=2, num_out=62, dropout=0.5).to(device)
-# loss_func = nn.CrossEntropyLoss()
-# opt = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=0.001)
-# # opt = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=0.5)
-#
-# train_acc_list = []
-# train_loss_list = []
-# test_acc_list = []
-# test_loss_list = []
-#
-# G = testclass()
-# train_len = G.len(train_DE.shape[0], batch_size)
-# test_len = G.len(test_DE.shape[0], batch_size)
-#
-# for epoch in range(num_epochs):
-# # -------------------------------------------------
-#     total_train_acc = 0
-#     total_train_loss = 0
-#
-#     for de, labels in train_loader:
-#         de = de.to(device)
-#         labels = labels.to(device)
-#
-#         output = model(de)
-#         # print("output:", output.shape)
-#         # print(labels.shape)
-#         train_loss = loss_func(output, labels.long())
-#
-#         opt.zero_grad()
-#         train_loss.backward()
-#         opt.step()
-#
-#         train_acc = (output.argmax(dim=1) == labels).sum()
-#
-#         train_loss_list.append(train_loss)
-#         total_train_loss = total_train_loss + train_loss.item()
-#
-#         train_acc_list.append(train_acc)
-#         total_train_acc += train_acc
-#
-#     train_loss_list.append(total_train_loss / (len(train_loader)))
-#     train_acc_list.append(total_train_acc / train_len)
-#
-# # -------------------------------------------------
-#     total_test_acc = 0
-#     total_test_loss = 0
-#
-#     with torch.no_grad():
-#         for de, labels in test_loader:
-#             de = de.to(device)
-#             labels = labels.to(device)
-#
-#             output = model(de)
-#             test_loss = loss_func(output, labels.long())
-#
-#             test_acc = (output.argmax(dim=1) == labels).sum()
-#
-#             test_loss_list.append(test_loss)
-#             total_test_loss = total_test_loss + test_loss.item()
-#
-#             test_acc_list.append(test_acc)
-#             total_test_acc += test_acc
-#
-#     test_loss_list.append(total_test_loss / (len(test_loader)))
-#     test_acc_list.append(total_test_acc / test_len)
-#
-#     # print result
-#     print("Epoch: {}/{} ".format(epoch + 1, num_epochs),
-#           "Training Loss: {:.4f} ".format(total_train_loss / len(train_loader)),
-#           "Training Accuracy: {:.4f} ".format(total_train_acc / train_len),
-#           "Test Loss: {:.4f} ".format(total_test_loss / len(test_loader)),
-#           "Test Accuracy: {:.4f}".format(total_test_acc / test_len)
-#           )
-
 
 #五折交叉验证
-DE = torch.tensor(np.load("G:/组合脑相关内容/SEED-IV/test/DE/3/15.npy").real.astype(float), dtype=torch.float)
-# rule = np.load("G:/吴老师的论文/规则集解释/SEED/1_20131027_rules.npy")
+DE = torch.tensor(np.load("G:/XXX/SEED-IV/test/DE/3/15.npy").real.astype(float), dtype=torch.float)
 #会话一
 # labels = np.concatenate([np.ones([42, 1]), np.full((23,1), 2), np.full((49,1), 3), np.zeros([32, 1]), np.full((22,1), 2), np.zeros([40, 1]), np.zeros([38, 1]), np.ones([52, 1]),
 #                           np.zeros([36, 1]), np.ones([42, 1]), np.full((12,1), 2), np.ones([27, 1]), np.ones([54, 1]), np.ones([42, 1]), np.full((64,1), 2), np.full((35,1), 3),
@@ -209,7 +112,7 @@ for train_idx, test_idx in kfold.split(MyDataset):
         if (total_test_acc / test_len) > min_acc:
             min_acc = total_test_acc / test_len
             # res_TP_TN_FP_FN = TP_TN_FP_FN
-            torch.save(model.state_dict(), 'G:/吴老师的论文/规则集解释/模型可视化/SEED-IV-3-15.pth')
+            torch.save(model.state_dict(), 'G:/XXX/规则集解释/模型可视化/SEED-IV-3-15.pth')
         # print result
         print("Epoch: {}/{} ".format(epoch + 1, num_epochs),
               "Training Loss: {:.4f} ".format(total_train_loss / len(train_loader)),
