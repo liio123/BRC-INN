@@ -115,7 +115,7 @@ def kmeans_(train_data, labelss, op):
 
 
 if __name__ == '__main__':
-    dir = "G:/组合脑相关内容/SEED-IV/test/DE/3"
+    dir = "G:/XXX/SEED-IV/test/DE/3"
 
     for subject in subjects:
         # subject = "1_20131027.mat.npy"
