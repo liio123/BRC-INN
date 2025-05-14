@@ -91,7 +91,7 @@ class Model(nn.Module):
 
     def forward(self, de):
         # l = torch.tensor([[0.298, 0.396, 0.306], [0.325,0.530,0.145], [0.282,0.569,0.150], [0.281,0.719,0]], requires_grad=True).cuda()
-        l = torch.tensor(np.load("G:/吴老师的论文/规则集解释/SEED-IV/3/15_rules.npy"), requires_grad=True).cuda()
+        l = torch.tensor(np.load("G:/XXX/规则集解释/SEED-IV/3/15_rules.npy"), requires_grad=True).cuda()
         # de = de.reshape(de.shape[0], de.shape[1], de.shape[2], 1)
         # print(de.shape) # [128, 16, 5]
         # 可分离卷积
