@@ -86,7 +86,7 @@ def tSNE_2D(datas, labels, label_names):
     # plt.xlabel('Dimension 1')
     # plt.ylabel('Dimension 2')
     # plt.legend(prop={'family' : 'Times New Roman', 'size' : 22}, labels=["happy", "neural", "sad", "fear"])
-    plt.savefig('G:/吴老师的论文/规则集解释/模型可视化/TSNE_SEEDIV_manual.pdf', dpi=120, bbox_inches='tight')
+    plt.savefig('G:/XXX/规则集解释/模型可视化/TSNE_SEEDIV_manual.pdf', dpi=120, bbox_inches='tight')
     plt.tight_layout()
     plt.show()
 
@@ -133,10 +133,10 @@ def tSNE_3D(datas, labels, label_names):
 
 start_time = time.time()
 model = Model(xdim = [batch_size, channel_num, band_num], kadj=2, num_out=62, dropout=0.5).to(device)
-model.load_state_dict(torch.load("G:/吴老师的论文/规则集解释/模型可视化/SEED-IV-3-15.pth"))
+model.load_state_dict(torch.load("G:/XXX/规则集解释/模型可视化/SEED-IV-3-15.pth"))
 
 #测试集-DE
-X_test = torch.tensor(np.load("G:/组合脑相关内容/SEED-IV/test/DE/3/15.npy").real.astype(float), dtype=torch.float)
+X_test = torch.tensor(np.load("G:/XXX/SEED-IV/test/DE/3/15.npy").real.astype(float), dtype=torch.float)
 # X_test = X_test[100:200,:,:]
 
 
@@ -173,40 +173,6 @@ total_test_acc += test_acc
 end_time = time.time()
 
 print("Test Accuracy: {:.4f}".format(total_test_acc / test_len), "Running time:",end_time-start_time, "s")
-#
-# print(output.argmax(dim=1).shape)
-# print(Y_test)
-# from matplotlib import font_manager
-# # my_font = font_manager.FontProperties(fname="C:\Windows\Fonts\MSYHL.TTC")
-# t, p = stats.ttest_ind(np.array(output.argmax(dim=1)),np.array(Y_test))
-# print(p)
-#
-# x = range(0,600)
-#
-# # 绘制图像 label 设置标签 color设置颜色 linestyle 设置线条 linewidth 设置线条粗细 alpha设置透明度
-# plt.plot(x, np.array(output.argmax(dim=1)), label='predicted_label', color='red', linestyle='--')
-# plt.plot(x, np.array(Y_test), label='true_label', color='green', linestyle='--')
-#
-# # 设置X刻度
-# # _xtick_labels = ['{}岁'.format(i) for i in x]
-# # plt.xticks(x, _xtick_labels, rotation=45, fontproperties=my_font)
-#
-# # 设置X，Y轴标签
-# plt.xlabel('Number of Samples')
-# plt.ylabel('Class')
-# # plt.title('在11岁到30岁每年交往女(男)朋友的数目', fontproperties=my_font)
-# plt.yticks([i for i in range(0, 2) if i % 1 == 0])
-# # plt.yticks(range(0,9)) 设置网格单位间距
-#
-# # 绘制网格
-# # plt.grid(alpha=0.8)  # alpha调整网格透明度
-#
-# # 添加图例 先写label参数 再用plt.lenged()
-# plt.legend(loc='lower right')  # 显示中文设置prop参数 loc='upper left'将图例移到左上方
-# plt.savefig("E:/博士成果/跟吴老师的第一篇文章/配图/label_1.pdf")
-# plt.savefig("E:/博士成果/跟吴老师的第一篇文章/配图/label_1.tif")
-# # 展示图形
-# plt.show()
 
 tSNE_2D(output, Y_test, "012")
 # tSNE_3D(output, Y_test, "012")
