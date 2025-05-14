@@ -41,7 +41,7 @@ ScoreArousal_label_list = []
 for i in range(1, 24):
     eeg = np.load(f"DE/{i}-DE-EEG.npy")    # (926, 5, 14, 8)
     ecg = np.load(f"DE/{i}-DE-ECG.npy")    # (926, 5, 2, 8)
-    label = np.load(rf"D:\Program Files\JetBrains\project\zzh_project\label\\{i}-ScoreArousal-label.npy")
+    label = np.load(rf"D:\Program Files\JetBrains\project\XXX\label\\{i}-ScoreArousal-label.npy")
 
     eeg_pca = sby_dim_re(eeg)   # (14, 8)
     ecg_pca = sby_dim_re(ecg)   # (2, 8)
@@ -82,7 +82,7 @@ for i in range(1, 24):
     eeg_ecg = np.concatenate([eeg_weight * lpls_U_eigVal_14, ecg_weight * lpls_Vh_eigVal_2], axis=3)    # (926, 5, 8, 16)
     eeg_ecg = eeg_ecg.transpose(0, 3, 1, 2)     # (926, 16, 5, 8)
     print(eeg_ecg.shape)
-    np.save(rf"D:\Program Files\JetBrains\project\zzh_project\weight_de\DE{i}.npy", eeg_ecg)
+    np.save(rf"D:\Program Files\JetBrains\project\XXX\weight_de\DE{i}.npy", eeg_ecg)
     DE_list.append(eeg_ecg)
     ScoreArousal_label_list.append(label)
 DE = np.concatenate(DE_list)
@@ -90,6 +90,6 @@ labels = np.concatenate(ScoreArousal_label_list)
 print(DE.shape)
 print(labels.shape)
 # np.save("D:\Program Files\JetBrains\project\zzh_project\DE.npy", DE)
-np.save("D:\Program Files\JetBrains\project\zzh_project\ScoreArousal_label.npy", labels)
+np.save("D:\Program Files\JetBrains\project\XXX\ScoreArousal_label.npy", labels)
 
 
